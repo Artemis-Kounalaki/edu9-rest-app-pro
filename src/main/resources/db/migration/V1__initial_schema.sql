@@ -45,7 +45,7 @@ CREATE TABLE users (
     uuid BINARY(16) NOT NULL,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role_id BIGINT NOT NULL,
+    s BIGINT NOT NULL,
 
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
@@ -103,10 +103,10 @@ CREATE TABLE attachments (
 
 CREATE TABLE personal_information (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    amka VARCHAR(255),
-    identity_number VARCHAR(255),
-    place_of_birth VARCHAR(255),
-    municipality_of_registration VARCHAR(255),
+    amka VARCHAR(255) NOT NULL,
+    identity_number VARCHAR(255) NOT NULL,
+    place_of_birth VARCHAR(255) NOT NULL,
+    municipality_of_registration VARCHAR(255) NOT NULL,
     amka_file_id BIGINT,
 
     created_at DATETIME NOT NULL,
