@@ -1,5 +1,8 @@
 package gr.aueb.cf.eduapp.core.exception;
 
+import lombok.Getter;
+
+@Getter
 public class AppGenericException extends Exception{
 
     private final String code;
