@@ -9,6 +9,7 @@ public record UserInsertDTO(
     String username,
     @NotNull @Pattern(regexp = "(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*+=])^.{8,}$")
     String password,
+    @NotNull
     Long roleId
     )
 {
