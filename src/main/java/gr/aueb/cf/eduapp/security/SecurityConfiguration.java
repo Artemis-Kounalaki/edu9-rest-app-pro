@@ -37,7 +37,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration {
-    private final JwtAthenticationFilter jwtAthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final ObjectMapper objectMapper;
 
     @Value("${allowed.origins}")
@@ -51,13 +51,13 @@ public class SecurityConfiguration {
                         corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(HttpMethod.POST, "api/v1/users").permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/v1/users/uuid").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint(myCustomAuthenticationEntryPoint())
                         .accessDeniedHandler(myCustomAccessDeniedHandler()));
@@ -65,6 +65,8 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+
+    @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
                                                          PasswordEncoder passwordEncoder){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
