@@ -32,13 +32,13 @@ public class PersonalInfo extends AbstractEntity{
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "amka_file_id", unique = true)
-    private Attachment amkafile;
+    private Attachment amkaFile;
 
     public void addAmkaFile(Attachment attachment){
-        this.amkafile = attachment;
+        this.amkaFile = attachment;
     }
     public void removeAmkaFile(){
-        this.amkafile = null;
+        this.amkaFile = null;
     }
 
 
