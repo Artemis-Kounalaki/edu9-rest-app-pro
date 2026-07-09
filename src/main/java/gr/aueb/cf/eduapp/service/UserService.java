@@ -1,8 +1,8 @@
 package gr.aueb.cf.eduapp.service;
 
-import gr.aueb.cf.eduapp.core.exception.EntityAlreadyExistsException;
-import gr.aueb.cf.eduapp.core.exception.EntityInvalidArgumentException;
-import gr.aueb.cf.eduapp.core.exception.EntityNotFoundException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityAlreadyExistsException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityInvalidArgumentException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityNotFoundException;
 import gr.aueb.cf.eduapp.dto.UserInsertDTO;
 import gr.aueb.cf.eduapp.dto.UserReadOnlyDTO;
 import gr.aueb.cf.eduapp.mapper.Mapper;
@@ -10,9 +10,9 @@ import gr.aueb.cf.eduapp.model.Role;
 import gr.aueb.cf.eduapp.model.User;
 import gr.aueb.cf.eduapp.repository.RoleRepository;
 import gr.aueb.cf.eduapp.repository.UserRepository;
-import jakarta.persistence.Table;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +42,7 @@ public class UserService implements IUserService{
            user.setPassword(passwordEncoder.encode(userInsertDTO.password()));
            Role role = roleRepository.findById(userInsertDTO.roleId())
                    .orElseThrow( () -> new EntityInvalidArgumentException("Role", "Role with id=" + userInsertDTO.roleId() + "does exist"));
+           role.addUser(user);
            userRepository.save(user);
            log.info("User with username ={} saved successfully", userInsertDTO.username());
            return mapper.mapToUserReadOnlyDTO(user);
@@ -57,6 +58,7 @@ public class UserService implements IUserService{
     }
 
     @Transactional(readOnly = true)
+    @PreAuthorize("hasAuthority('VIEW_USER')")
     @Override
     public UserReadOnlyDTO getUserByUuid(UUID uuid) throws EntityNotFoundException {
         try{
@@ -72,6 +74,7 @@ public class UserService implements IUserService{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('VIEW_USER')")
     @Transactional(readOnly = true)
     public UserReadOnlyDTO getUserByUuidDeletedFalse(UUID uuid) throws EntityNotFoundException {
         try{
