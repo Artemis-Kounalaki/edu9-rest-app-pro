@@ -1,6 +1,6 @@
 package gr.aueb.cf.eduapp.repository;
 
-import gr.aueb.cf.eduapp.dto.TeacherStatusReportView;
+//import gr.aueb.cf.eduapp.dto.TeacherStatusReportView;
 import gr.aueb.cf.eduapp.model.Teacher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

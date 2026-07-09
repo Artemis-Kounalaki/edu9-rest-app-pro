@@ -7,16 +7,16 @@ import gr.aueb.cf.eduapp.core.exceptions.FileUploadException;
 //import gr.aueb.cf.eduapp.core.filters.Paginated;
 //import gr.aueb.cf.eduapp.core.filters.TeacherFilters;
 //import gr.aueb.cf.eduapp.dto.TeacherUpdateDTO;
-import gr.aueb.cf.eduapp.core.filters.TeacherFilters;
+//import gr.aueb.cf.eduapp.core.filters.TeacherFilters;
 import gr.aueb.cf.eduapp.dto.TeacherInsertDTO;
 import gr.aueb.cf.eduapp.dto.TeacherReadOnlyDTO;
-import gr.aueb.cf.eduapp.dto.TeacherUpdateDTO;
+//import gr.aueb.cf.eduapp.dto.TeacherUpdateDTO;
 import gr.aueb.cf.eduapp.mapper.Mapper;
 import gr.aueb.cf.eduapp.model.*;
 import gr.aueb.cf.eduapp.model.static_data.Region;
 import gr.aueb.cf.eduapp.repository.*;
 //import gr.aueb.cf.eduapp.specification.TeacherSpecification;
-import gr.aueb.cf.eduapp.specification.TeacherSpecification;
+//import gr.aueb.cf.eduapp.specification.TeacherSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
@@ -373,5 +373,10 @@ public class TeacherServiceImpl implements ITeacherService {
                 pageable,
                 1
         );
+    }
+
+    @Override
+    public boolean isTeacherExistsByVat(String vat) {
+        return false;
     }
 }
