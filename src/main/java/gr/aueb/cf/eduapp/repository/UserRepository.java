@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> ,
     Optional<User> findByUsername(String username );
 
     Optional<User> findByUuidAndDeletedFalse(UUID uuid);
-    Optional<User> findByUsernameAndDeletedFalse(UUID uuid);
+    Optional<User> findByUsernameAndDeletedFalse(String username);
 
 }
