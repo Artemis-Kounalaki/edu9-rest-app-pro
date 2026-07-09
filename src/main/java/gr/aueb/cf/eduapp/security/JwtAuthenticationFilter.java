@@ -3,7 +3,6 @@ package gr.aueb.cf.eduapp.security;
 import gr.aueb.cf.eduapp.authentication.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
-import jakarta.persistence.Column;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class JwtAthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -38,8 +37,9 @@ public class JwtAthenticationFilter extends OncePerRequestFilter {
         String username;
 
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);}
-        else{
+            filterChain.doFilter(request, response);
+            return;
+        }
             jwt = authorizationHeader.substring(7);
             try{
                 username = jwtService.extractSubject(jwt);
@@ -52,9 +52,8 @@ public class JwtAthenticationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities()
                     );
-SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
-
             }
             catch (ExpiredJwtException e){
                 throw new AuthenticationCredentialsNotFoundException("Token waw expired");
@@ -71,6 +70,5 @@ SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
 
             filterChain.doFilter(request, response);
-        }
     }
 }
