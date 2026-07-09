@@ -1,15 +1,13 @@
 package gr.aueb.cf.eduapp.api;
 
-import gr.aueb.cf.eduapp.core.exception.EntityAlreadyExistsException;
-import gr.aueb.cf.eduapp.core.exception.EntityInvalidArgumentException;
-import gr.aueb.cf.eduapp.core.exception.EntityNotFoundException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityAlreadyExistsException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityInvalidArgumentException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityNotFoundException;
 import gr.aueb.cf.eduapp.dto.UserInsertDTO;
 import gr.aueb.cf.eduapp.dto.UserReadOnlyDTO;
-import gr.aueb.cf.eduapp.model.User;
 import gr.aueb.cf.eduapp.service.UserService;
-import gr.aueb.cf.eduapp.core.exception.ValidationException;
+import gr.aueb.cf.eduapp.core.exceptions.ValidationException;
 
-import jakarta.servlet.Servlet;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +42,7 @@ public class UserRestController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{uuid")
+                .path("/{uuid}")
                 .buildAndExpand(userReadOnlyDTO.uuid())
                 .toUri();
 
