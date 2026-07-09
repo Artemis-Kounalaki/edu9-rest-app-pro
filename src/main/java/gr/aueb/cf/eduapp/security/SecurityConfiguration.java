@@ -56,6 +56,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/api/v1/teachers").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/teachers/{uuid}/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/*").hasAuthority("VIEW_USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/teachers/{uuid}/*").hasAuthority("EDIT_TEACHER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
