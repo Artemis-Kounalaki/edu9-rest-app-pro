@@ -10,4 +10,6 @@ public interface PersonalInfoRepository extends JpaRepository<PersonalInfo, Long
         JpaSpecificationExecutor<PersonalInfo> {
 
     Optional<PersonalInfo> findByAmka(String amka);
+    Optional<PersonalInfo> findByIdentityNumber(String identityNumber);
+
 }
