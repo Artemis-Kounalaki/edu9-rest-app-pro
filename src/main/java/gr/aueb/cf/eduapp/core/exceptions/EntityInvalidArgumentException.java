@@ -1,4 +1,4 @@
-package gr.aueb.cf.eduapp.core.exception;
+package gr.aueb.cf.eduapp.core.exceptions;
 
 public class EntityInvalidArgumentException extends AppGenericException{
     private static final String DEFAULT_CODE = "InvalidArgument";
