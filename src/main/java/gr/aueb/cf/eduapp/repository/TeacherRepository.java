@@ -29,6 +29,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long>,
 
     boolean existsByUuidAndUser_Uuid(UUID teacherUuid, UUID userUuid);
 
+
 //    @Query(value = """
 //        SELECT
 //            r.name AS periochi,
