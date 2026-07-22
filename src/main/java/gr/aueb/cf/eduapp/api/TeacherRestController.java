@@ -75,7 +75,7 @@ public class TeacherRestController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{uuid")
+                .path("/{uuid}")
                 .buildAndExpand(teacherReadOnlyDTO.uuid())
                 .toUri();
 
