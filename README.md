@@ -16,7 +16,7 @@ A Spring Boot REST API for managing teachers and users in an educational context
 
 - Java 21
 - MySQL 8+
-- Gradle (wrapper included)
+- Gradle
 
 ## Database Setup
 
